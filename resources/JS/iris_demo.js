@@ -149,7 +149,7 @@ function displayInputs(){
     //display label and slider for the the learning rate of the perceptron
     lblsldrLr = createElement('label', 'Learning Rate: ');
     lblsldrLr.position(10,45);
-    sldrLr = createSlider(0,100, 1);
+    sldrLr = createSlider(0,10, 1);
     sldrLr.position(lblsldrLr.x + lblsldrLr.width +5 ,45);
     sldrLr.size(50, AUTO);
     sldrLr.input(getLearningRate);

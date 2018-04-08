@@ -4,3 +4,10 @@
 #irisDemo{
     border: 1px solid black;
 }
+#arch{
+    border: 1px solid black;
+    padding: none;
+}
+iframe{
+    border: none;
+}

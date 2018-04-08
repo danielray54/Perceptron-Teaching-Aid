@@ -5,7 +5,7 @@ RANDOM POINTS LINEAR SEPERABLE DEMO
     University of Liverpool - 2018
 */
 //declaring variables used within the demo
-let perc, cnv, sldrLr, btnTrain, inpNoOfPoint, noOfPoints, learnRate, lblNoOfPoint, lblLr, lblOutput, btnShowPoints, amountPoints, pointShow, training, train, btnStop, accuracy, lblInputX1, lblInputX2, inpPredictX1, inpPredictX2, btnPredict, predictOuput;
+let perc, cnv, sldrLr, btnTrain, inpNoOfPoint, noOfPoints, learnRate, lblNoOfPoint, lblLr, lblOutput,lblPredict, btnShowPoints, amountPoints, pointShow, training, train, btnStop, accuracy, lblInputX1, lblInputX2, inpPredictX1, inpPredictX2, btnPredict, predictOuput, btnReset;
 //declaring and initilising arrays and indexs
 let points = [];
 let WOC = [];
@@ -18,10 +18,10 @@ function setup() {
     //create the canvas for the demo
 	cnv = createCanvas(700,500);
     //put the canvas within a <div> in order to manage in the html code
-    cnv.parent('rdnDemo');
+    cnv.parent('rndDemo');
     //background colour white
     background(255);
-    //call back functions for displaying user controls
+      //call back functions for displaying user controls
     displayInputs();
     //call back function to display the outputs
     displayOutputs();
@@ -31,6 +31,9 @@ Draw function
     code runs as a ever lasting loop
 */
 function draw() {
+
+
+
     //draw the boundary line, between the controls and the coordinate plane
     line(505,0,505,500);
     //if statement to excecute if the points are on screen and the training button has been clicked
@@ -201,11 +204,11 @@ function displayInputs(){
     lblNoOfPoint.position(520,50);
     inpNoOfPoint = createInput(' ');
     inpNoOfPoint.position(lblNoOfPoint.x + lblNoOfPoint.width +5 , 50);
-	inpNoOfPoint.size(50, 20);
+	inpNoOfPoint.size(50, 15);
     //display label and slider for the the learning rate of the perceptron
     lblsldrLr = createElement('label', 'Learning Rate: ');
     lblsldrLr.position(520,80);
-    sldrLr = createSlider(0,100, 1);
+    sldrLr = createSlider(0,10, 1);
     sldrLr.position(lblsldrLr.x + lblsldrLr.width +5 ,80);
     sldrLr.size(50, AUTO);
     sldrLr.input(getLearningRate);
@@ -265,14 +268,14 @@ function showPredictControls(){
     lblInputX1.show();
     inpPredictX1 = createInput(' ');
     inpPredictX1.position(lblInputX1.x + lblInputX1.width +5 , 225);
-	inpPredictX1.size(50, 20);
+	inpPredictX1.size(50, 15);
     inpPredictX1.show();
     lblInputX2 = createElement('label', 'Input (X2): ');
     lblInputX2.position(520,255);
     lblInputX2.show();
     inpPredictX2 = createInput(' ');
     inpPredictX2.position(lblInputX2.x + lblInputX2.width +5 , 255);
-	inpPredictX2.size(50, 20);
+	inpPredictX2.size(50, 15);
     inpPredictX2.show();
     //creates button for the user to click and predict the inputted  values
     btnPredict = createButton('Predict');
@@ -314,17 +317,17 @@ function predictPoint(){
     let predictX = parseInt(inpPredictX1.value());
     let predictY = parseInt(inpPredictX2.value());
     //validation check to make sure inputs are numbers
-    if(isNaN(predictX) && isNaN(predictY)){
+    if(isNaN(predictX) && isNaN(predictY) || predictX > 500 && predictY > 500){
         //if not then the label of the input turns red and the input is emptied
         lblInputX1.style("color", "#B20000");
         inpPredictX1.value('');
         lblInputX2.style("color", "#B20000");
         inpPredictX2.value('');
-    }else if(isNaN(predictX)){
+    }else if(isNaN(predictX) || predictX > 500){
         //if not then the label of the input turns red and the input is emptied
         lblInputX1.style("color", "#B20000");
         inpPredictX1.value('');
-    }else if(isNaN(predictY)){
+    }else if(isNaN(predictY)|| predictY > 500){
         //if not then the label of the input turns red and the input is emptied
         lblInputX2.style("color", "#B20000");
         inpPredictX2.value('');
@@ -339,8 +342,11 @@ function predictPoint(){
         let predictxy = [predictX, predictY];
         //calls the predict function in the perceptron with the users inputs and holds it within a variable
         prediction = perc.predict(predictxy);
+        fill(30,144,255);
+        stroke(1);
+        ellipse(predictX, predictY, 8, 8);
         //ouputs the prediction to screen
-        predictOuput.html(prediction);
+        predictOuput.html('Class ' + prediction);
     }
 }
 /**

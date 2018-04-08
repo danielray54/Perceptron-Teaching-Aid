@@ -16,7 +16,7 @@ function Perceptron(input, learning_rate){
         }
     }
     Perceptron.prototype.activation_function = function(total){
-        if(total >=0){
+        if(total >0){
             return 1;
         }else{
             return -1;
@@ -56,8 +56,6 @@ function Perceptron(input, learning_rate){
 			this.weights[i] += this.learning_rate * error * inputs[i];
 		}
         this.bias += error * this.learning_rate;
-       // console.log(target + " " + guess);
-        //console.log(this.current_accuracy());
 	}
 
 
