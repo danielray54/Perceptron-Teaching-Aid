@@ -12,20 +12,27 @@ USER CONTROLS - INPUTS X1, X2 + TARGET OUTPUT
 DISPLAY THE STEPS BENEATH ANIMATION
 */
 let step = 0;
-let lblControls, learnRate, lblsldrLr, sldrLr, lblLr, btnNext, X1, lblX1, X2, lblX2;
+let lblControls, learnRate, lblsldrLr, sldrLr, lblLr, btnNext, X1, lblX1, X2, lblX2, inpX1, inpX2, bias, target, weightedX1, weightedX2, weghtedBias, total, activation, epoch, oldTotal,
+newTotal;
 function setup(){
     cnv = createCanvas(700,500);
     cnv.parent('arch');
     inputControls();
     outputDisplay();
-
-
+    biasWeight = (Math.random() * 2 -1).toFixed(1);
+    x1Weight = (Math.random() * 2 -1).toFixed(1);
+    x2Weight = (Math.random() * 2 -1).toFixed(1);
+    inpX1 = 20;
+    inpX2 = 30;
+    bias = 1;
+    target = 1;
+    epoch = 0;
 }
 function draw(){
    // console.log(mouseX, mouseY);
      background(255);
     line(500,0,500,500);
-    line(0,400,500,400);
+    line(0,315,500,315);
     if(step == 0){
        stepInit();
     }else if(step == 1){
@@ -42,8 +49,9 @@ function draw(){
         stepSix();
     }else if(step == 7){
         stepSeven();
+    }else if (step ==8){
+        stepEight();
     }
-
 }
 function outputDisplay(){
     lblDescription = createElement('label', '');
@@ -91,7 +99,13 @@ function getLearningRate(){
 }
 function nextStep(){
     if(step == 7){
-        step = 3;
+        if(btnNext.html() == 'Finish'){
+            step = 8;
+            btnNext.hide();
+            //btnNext.attribute('disabled');
+        }else{
+            step = 3;
+        }
     }else if(step == 2 && isNaN(learnRate)){
         lblsldrLr.style("color", "#B20000");
     }else{
@@ -117,41 +131,71 @@ function displayArchit(){
     if(step >= 1){
         line(200,150,282,207);
         ellipse(200,150,50,50);
-        text('1', 195, 155);
+        text(bias, 195, 155);
     }
     if (step == 1 || step == 2){
-        wocB.html('0.3');
-        wocX1.html('0.7');
-        wocX2.html('-1');
+        wocB.html(biasWeight);
+        wocX1.html(x1Weight);
+        wocX2.html(x2Weight);
         X1 = ellipse(50,175,30,30);
-        lblX1 = text('20', 43, 180);
+        lblX1 = text(inpX1, 43, 180);
         X2 = ellipse(50,275,30,30);
-        lblX2 = text('30', 43, 280);
+        lblX2 = text(inpX2, 43, 280);
     }else if(step == 3){
-        X1 = ellipse(200,200,30,30);
-        lblX1 = text('14', 195, 205);
-        X2 = ellipse(200,250,30,30);
-        lblX2 = text('-30', 193, 255);
-        weighBias = ellipse(258,189,30,30);
-        lblweighBias = text('0.3', 250, 192);
+        if(epoch>0){
+            biasWeight = newBiasWeight;
+            x1Weight = newX1Weight;
+            x2Weight = newX2Weight;
+        }
+         weightedX1 = inpX1 * x1Weight;
+         weightedX2 = inpX2 * x2Weight;
+         weghtedBias = bias * biasWeight;
+        X1 = ellipse(200,200,40,40);
+        lblX1 = text(weightedX1.toFixed(2), 185, 205);
+        X2 = ellipse(200,250,40,40);
+        lblX2 = text(weightedX2.toFixed(2), 185, 255);
+        weighBias = ellipse(252,189,40,40);
+        lblweighBias = text(weghtedBias.toFixed(2), 235, 192);
+        output.html('');
     }else if(step == 4){
-        text('-15.7',285,230);
+        total = weightedX1 + weightedX2 + weghtedBias;
+        text(total.toFixed(2),285,230);
     }else if(step == 5){
-        text('-15.7',285,230);
-        output.html('0');
+        text(total.toFixed(2),285,230);
+        //total = parseFloat(total);
+        if(total > 0){
+             activation = '1';
+        }else{
+             activation = '0';
+        }
+        output.html(activation);
+    }else if(step == 6){
+            newBiasWeight = parseFloat(biasWeight) + (parseFloat(learnRate) *(parseInt(target) - parseInt(activation)) * parseInt(bias));
+            newX1Weight = parseFloat(x1Weight) + (parseFloat(learnRate) *(parseInt(target) - parseInt(activation)) * parseFloat(inpX1));
+            newX2Weight = parseFloat(x2Weight) + (parseFloat(learnRate) *(parseInt(target) - parseInt(activation)) * parseFloat(inpX2));
+            wocB.html(newBiasWeight.toFixed(2));
+            wocX1.html(newX1Weight.toFixed(2));
+            wocX2.html(newX2Weight.toFixed(2));
+    }else if(step == 7){
+        oldTotal = parseFloat(biasWeight) + parseFloat(x1Weight) + parseFloat(x2Weight);
+        newTotal = newBiasWeight + newX1Weight + newX2Weight;
+        if(oldTotal == newTotal){
+           btnNext.html('Finish');
+        }else{
+           epoch++;
+        }
     }
-
 }
 function stepInit(){
     //show training set and arch structure
     displayArchit();
 
     lblStep = createElement('label', '');
-    lblStep.position(15,415);
+    lblStep.position(15,325);
     lblStepDesc = createElement('label', '');
-    lblStepDesc.position(25,435);
+    lblStepDesc.position(25,345);
     lblStepDetail = createElement('label', '');
-    lblStepDetail.position(25,455);
+    lblStepDetail.position(25,365);
 }
 function stepOne(){
     displayArchit();
@@ -175,7 +219,7 @@ function stepThree(){
     displayArchit();
     lblStep.html('Step 3: ');
     lblStepDesc.html('Inputs are Weighted');
-    lblStepDetail.html('X1 = 20 * 0.7 <br /> X2 = 30 * -1 <br /> Bias = 1 * 0.3');
+    lblStepDetail.html('X1 = '+ inpX1 +' * ' + parseFloat(x1Weight).toFixed(2) + '<br /> X2 = '+ inpX2 +' * '+ parseFloat(x2Weight).toFixed(2) +'<br /> Bias = '+ bias +' * ' + parseFloat(biasWeight).toFixed(2));
     lblsldrLr.hide();
     sldrLr.hide();
     lblLr.hide();
@@ -185,22 +229,30 @@ function stepFour(){
     displayArchit();
     lblStep.html('Step 4: ');
     lblStepDesc.html('Weighted Inputs are Summed');
-    lblStepDetail.html('X1 + X2 + Bias<br / > 14 + -30 + 0.3');
+    lblStepDetail.html('X1 + X2 + Bias<br / >'+ weightedX1.toFixed(2) +' + ' + weightedX2.toFixed(2) + ' + ' + weghtedBias.toFixed(2));
 }
 function stepFive(){
     displayArchit();
     lblStep.html('Step 5: ');
     lblStepDesc.html('Sum goes through Activation Function');
-    lblStepDetail.html('We can use the Heaviside step function as the perceptrons activation <br/>- if 0 or below, Output = 0<br/>- if 0 or above, Output = 1');
+    lblStepDetail.html('We can use the Heaviside step function as the Perceptron\'s activation <br/>- if 0 or below, Output = 0<br/>- if 0 or above, Output = 1');
 }
 function stepSix(){
     displayArchit();
     lblStep.html('Step 6: ');
     lblStepDesc.html('Weights of Connections are Updated');
-    lblStepDetail.html('');
+    lblStepDetail.html('The updated weights are calculated by: <br/> New Weight = Old Weight + (Learning Rate * Error * Input), <br/>where Error = Target Output - Guess Output<br/><br/> &nbsp;WeightX1 = ' + parseFloat(x1Weight).toFixed(2) + ' + (' + learnRate + ' * (' + target + ' - ' + activation + ') * ' + inpX1+ ')<br/> &nbsp;WeightX2 = ' + parseFloat(x2Weight).toFixed(2) + ' + (' + learnRate + ' * (' + target + ' - ' + activation + ') * ' + inpX2+ ')<br/> &nbsp;WeightBias = ' + parseFloat(biasWeight).toFixed(2) + ' + (' + learnRate + ' * (' + target + ' - ' + activation + ') * ' + bias+ ')');
 }
 function stepSeven(){
     displayArchit();
     lblStep.html('Step 7: ');
     lblStepDesc.html('Terminating Check');
+     lblStepDetail.html('To check if the training loop should be terminated, <br/> we can compare the new weights of connections with the<br/> old weights of connections to see if any learning took place: <br/> ∑Old Weights = '+ parseFloat(biasWeight).toFixed(2) + ' + ' + parseFloat(x1Weight).toFixed(2) + ' + ' + parseFloat(x2Weight).toFixed(2) + ' = ' + parseFloat(oldTotal).toFixed(2) + '<br/> ∑New Weights = '+ parseFloat(newBiasWeight).toFixed(2) +' + ' + parseFloat(newX1Weight).toFixed(2) + ' + ' + parseFloat(newX2Weight).toFixed(2) + ' = ' + parseFloat(newTotal).toFixed(2));
+}
+function stepEight(){
+    displayArchit();
+    output.html('');
+    lblStep.html('Step 8: ');
+    lblStepDesc.html('Optimal Weights of Connections');
+     lblStepDetail.html('The weights of connections have been adjusted to their optimal weights.');
 }
