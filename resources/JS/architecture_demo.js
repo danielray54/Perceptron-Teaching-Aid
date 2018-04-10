@@ -1,5 +1,5 @@
 
-let step, lblControls, learnRate, lblsldrLr, sldrLr, lblLr, btnNext, X1, lblX1, X2, lblX2, x1Val, x2Val, bias, targetVal, weightedX1, weightedX2, weghtedBias, total, activation, epoch, oldTotal, newTotal;
+let step, lblControls, learnRate, lblsldrLr, sldrLr, lblLr, btnNext, X1, lblX1, X2, lblX2, x1Val, x2Val, bias, targetVal, weightedX1, weightedX2, weghtedBias, total, activation, epoch, oldTotal, newTotal, validX1, validX2;
 step = -1;
 function setup(){
     //
@@ -116,9 +116,11 @@ function inputControls(){
     lblTargetVal = createElement('label', 'Target Output: ');
     lblTargetVal.position(515,110);
     lblTargetVal.hide();
-    inpTargetVal = createInput('');
+    inpTargetVal = createSelect('');
     inpTargetVal.position(lblTargetVal.x + lblTargetVal.width +5, 110);
-	inpTargetVal.size(50, 15);
+    inpTargetVal.option('0');
+    inpTargetVal.option('1');
+	inpTargetVal.size(50, 20);
     inpTargetVal.hide();
     //
     btnNext = createButton('Next Step');
@@ -151,7 +153,6 @@ function nextStep(){
         }else{
             lblX1Val.style("color", "#000000");
             x1Val = inpX1.value();
-            console.log(x1Val);
             validX1 = true;
         }
         if(isNaN(inpX2.value()) || inpX2.value() == ''){
@@ -161,20 +162,10 @@ function nextStep(){
         }else{
             lblX2Val.style("color", "#000000");
             x2Val = inpX2.value();
-            console.log(x2Val);
             validX2 = true;
         }
-        if(isNaN(inpTargetVal.value())|| inpTargetVal.value() == ''){
-            lblTargetVal.style("color", "#B20000");
-            inpTargetVal.value('');
-            validTarg = false;
-        }else{
-            lblTargetVal.style("color", "#000000");
+        if(validX1 == true && validX2==true){
             targetVal = inpTargetVal.value();
-            console.log(targetVal);
-            validTarg = true;
-        }
-        if(validX1 == true && validX2==true && validTarg == true){
             step = 0;
         }
     }else if(step == 2 && isNaN(learnRate)){
