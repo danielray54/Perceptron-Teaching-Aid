@@ -403,5 +403,5 @@ function stepEight(){
     //
     lblStep.html('Step 8: ');
     lblStepDesc.html('Optimal Weights of Connections');
-     lblStepDetail.html('The weights of connections have been adjusted to their optimal weights.');
+     lblStepDetail.html('The weights of connections have been adjusted to their optimal weights,<br/> according to the Training Set.');
 }
