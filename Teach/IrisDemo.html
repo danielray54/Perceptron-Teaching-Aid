@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Perceptron Algorithm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/CSS/style.css">
+</head>
+<body>
+    <nav class='navbar-light bg-light'>
+         <a href = '../index.html'  class="navbar-brand ">The Perceptron Algorithm Teaching Aid</a>
+    </nav>
+    <nav class="nav nav-tabs sticky-top nav-fill nav-justified navbar-light bg-light">
+
+          <a class="nav-item nav-link" href="/Teach/AlgorithmDemo.html">Algorithm Demonstration</a>
+          <a class="nav-item nav-link" href="/Teach/RandomLinearDemo.html">Random Linear Demonstration</a>
+          <a class="nav-item nav-link active" href="/Teach/IrisDemo.html">Fisher's Iris Data Set</a>
+          <a class="nav-item nav-link" href="/Teach/LogicalGatesDemo.html">XOR Problem</a>
+        <a class="nav-item nav-link" href="/Teach/DiabetesDemo.html">Pima Diabetes Data Set</a>
+     </nav>
+     <br/>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-12">
+      <h2>Fisher's Iris Data Set</h2>
+      <p>We can now apply this functionality to real world data. Ronald Fisher, a Statistician and Biologist, collected data on three types of Iris Flower species; Iris setosa, Iris virginica and Iris versicolor. <br/> <img src='../resources/Images/iris.jpg' alt="Neuron Diagram" class="center" height="150" width="400"><br/>Four features were measured from each sample: the length and the width of the sepals and petals, in centimetres.
+      </p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sepal Length (cm)</th>
+              <th scope="col">Sepal Width (cm)</th>
+              <th scope="col">Petal Length (cm)</th>
+              <th scope="col">Petal Width (cm)</th>
+              <th scope="col">Species</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5.1</td>
+              <td>3.5</td>
+              <td>1.4</td>
+              <td>0.2</td>
+              <th scope="row">Iris Setosa</th>
+            </tr>
+            <tr>
+             <td>6.7</td>
+              <td>3.3</td>
+              <td>5.7</td>
+              <td>2.1</td>
+              <th scope="row">Iris Virginica</th>
+            </tr>
+            <tr>
+              <td>4.7</td>
+              <td>3.2</td>
+              <td>1.3</td>
+              <td>0.2</td>
+              <th scope="row">Iris Setosa</th>
+            </tr>
+            <tr>
+              <td>6.9</td>
+              <td>3.1</td>
+              <td>4.9</td>
+              <td>1.5</td>
+              <th scope="row">Iris Versicolor</th>
+            </tr>
+            <tr>
+              <td>4.6</td>
+              <td>3.1</td>
+              <td>1.5</td>
+              <td>0.2</td>
+              <th scope="row">Iris Setosa</th>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>3.2</td>
+              <td>4.7</td>
+              <td>1.4</td>
+              <th scope="row">Iris Versicolor</th>
+            </tr>
+            <tr>
+              <td>7.2</td>
+              <td>3.2</td>
+              <td>6</td>
+              <td>1.8</td>
+              <th scope="row">Iris Virginica</th>
+            </tr>
+          </tbody>
+        </table>
+        <br/>
+        <div style="text-align: center;">
+        <iframe src='../IrisDemo.html' id = 'iris' width="550" height="350"></iframe>
+        <br/>
+            <button type="button" class="btn btn-secondary" id ='btniris' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('iris').src += '';
+                }
+            btniris.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+            <p class="card-text">Step 1: Select the learning rate via the slider. <br/> Step 2: Press the Train button<br/> Step 3: Press the Stop button, to predict an unknown data set. <br/> Step 4: Enter in the data points for the Perceptron to predict. <br/> If you wish to reload the demonstration at any point, press the Reload button.</p>
+            </div>
+        </div>
+        <br/>
+    </div>
+ </div>
+</div>
+</body>
+<footer class="footer navbar-light bg-light">
+
+This website was made as part of a Final Year Project
+
+</footer>
+</html>

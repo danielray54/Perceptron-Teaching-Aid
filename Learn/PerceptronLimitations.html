@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Perceptron Algorithm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="/resources/CSS/style.css">
+</head>
+<body>
+    <nav class='navbar-light bg-light'>
+         <a href = '../index.html'  class="navbar-brand ">The Perceptron Algorithm</a>
+    </nav>
+    <nav class="nav nav-tabs sticky-top nav-fill nav-justified navbar-light bg-light">
+
+          <a class="nav-item nav-link " href="/Learn/Perceptron.html">What is the Perceptron?</a>
+          <a class="nav-item nav-link" href="/Learn/PerceptronUses.html">How Can The Perceptron Be Used?</a>
+          <a class="nav-item nav-link active" href="/Learn/PerceptronLimitations.html">Limitations of The Perceptron</a>
+          <a class="nav-item nav-link" href="/Learn/WhatsNext.html">What's Next?</a>
+     </nav>
+     <br/>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-12">
+      <h2>The XOR Problem</h2>
+      <p>Perceptron's are very limited in their abilities. A perceptron can only recognise patterns that a linearly seperable, meaning that the data points being used to train the perceptron can only be seperated by a line. To demonstrate this point, we can look at logical gates and how the perceptron can be used or not used to recognise their patterns. <br/> For both the AND and OR logical gates, the data points can be seperated by a single line, thus making them linearly seperable problems. However, the issue arises when we look at the XOR or Exclusive Or logical gate, as this gate is linearly inseperable. Look at the demonstration below to see a visual representation of this problem.</p>
+
+        <iframe src='../LogicalGatesDemo.html' id = 'arch' width="725" height="525"></iframe>
+        <br/>
+        <div style="text-align: center;">
+            <button type="button" class="btn btn-secondary" id ='btn' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('arch').src += '';
+                }
+            btn.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+            <p class="card-text">Step 1: Select the Logical Gate by selecting the radio button next to the gate name<br/> If you wish to reload the demonstration at any point, press the Reload button.</p>
+            </div>
+        </div>
+        <hr>
+        <br/>
+          <h2>Pima Indians Diabetes Data Set</h2>
+      <p>To further demonstrate the limitations of the Perceptron, we can apply real world data to the Perceptron to see where the limitations are. <br/>Pima Indians Diabetes dataset is originally from the National Institute of Diabetes and Digestive and Kidney Diseases. The objective of the dataset is to diagnostically predict whether or not a patient has diabetes, based on certain diagnostic measurements included in the dataset. Similar to the Iris Data Set, the data can be classified into the classes, 0 or 1 - which in this case gives an outcome of likelihood of getting diabetes within the next 5 year. The data set differs from the Iris data set by having 8 variables instead of 4, look at a sample of the data below: </p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Pregnancies</th>
+              <th scope="col">Glucose</th>
+              <th scope="col">Blood Pressure</th>
+              <th scope="col">Skin Thickness</th>
+              <th scope="col">Insulin</th>
+              <th scope="col">BMI</th>
+              <th scope="col">Diabetes Pedigree Function</th>
+              <th scope="col">Age</th>
+              <th scope="col">Outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>3</td>
+              <td>78</td>
+              <td>50</td>
+              <td>32</td>
+              <td>88</td>
+                <td>31</td>
+              <td>0.248</td>
+              <td>26</td>
+              <th>1</th>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>115</td>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+                <td>35.3</td>
+              <td>0.134</td>
+              <td>29</td>
+              <th>-1</th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>197</td>
+              <td>70</td>
+              <td>45</td>
+              <td>543</td>
+                <td>30.5</td>
+              <td>0.158</td>
+              <td>53</td>
+              <th>1</th>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>125</td>
+              <td>96</td>
+              <td>0</td>
+              <td>0</td>
+                <td>0</td>
+              <td>0.232</td>
+              <td>54</td>
+              <th>1</th>
+              </tr>
+              <tr>
+               <td>4</td>
+              <td>110</td>
+              <td>92</td>
+              <td>0</td>
+              <td>0</td>
+                <td>37.6</td>
+              <td>0.191</td>
+              <td>30</td>
+              <th>-1</th>
+            </tr>
+          </tbody>
+        </table>
+        <p>To see how the Perceptron handles this data set, please look at the demonstration below. Can you think if reasons why the Single Layered Perceptron can not process this data correctly? </p>
+    <iframe src='../DiabetesDemo.html' id = 'diab' width="525" height="325"></iframe>
+        <br/>
+        <div style="text-align: center;">
+            <button type="button" class="btn btn-secondary" id ='btn' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('diab').src += '';
+                }
+            btn.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+            <p class="card-text">
+                Step 1: Select the Learning Rate of the Perceptron. <br/>
+                Step 2: Press the Train Button to begin the Training phase<br/>
+                Step 3: Press the stop button to finsish the training phase.
+                <br/> If you wish to reload the demonstration at any point, press the Reload button.</p>
+            </div>
+        </div>
+
+    </div>
+ </div>
+</div>
+</body>
+<footer class="footer navbar-light bg-light">
+
+This website was made as part of a Final Year Project
+
+</footer>
+</html>

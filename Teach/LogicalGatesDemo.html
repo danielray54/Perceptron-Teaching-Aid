@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Perceptron Algorithm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/CSS/style.css">
+</head>
+<body>
+    <nav class='navbar-light bg-light'>
+         <a href = '../index.html'  class="navbar-brand ">The Perceptron Algorithm Teaching Aid</a>
+    </nav>
+    <nav class="nav nav-tabs sticky-top nav-fill nav-justified navbar-light bg-light">
+
+          <a class="nav-item nav-link" href="/Teach/AlgorithmDemo.html">Algorithm Demonstration</a>
+          <a class="nav-item nav-link" href="/Teach/RandomLinearDemo.html">Random Linear Demonstration</a>
+          <a class="nav-item nav-link " href="/Teach/IrisDemo.html">Fisher's Iris Data Set</a>
+          <a class="nav-item nav-link active" href="/Teach/LogicalGatesDemo.html">XOR Problem</a>
+        <a class="nav-item nav-link" href="/Teach/DiabetesDemo.html">Pima Diabetes Data Set</a>
+     </nav>
+     <br/>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-12">
+       <h2>The XOR Problem</h2>
+      <p>Perceptron's are very limited in their abilities. A perceptron can only recognise patterns that a linearly seperable, meaning that the data points being used to train the perceptron can only be seperated by a line.</p>
+
+        <iframe src='../LogicalGatesDemo.html' id = 'arch' width="725" height="525"></iframe>
+        <br/>
+        <div style="text-align: center;">
+            <button type="button" class="btn btn-secondary" id ='btn' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('arch').src += '';
+                }
+            btn.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+            <p class="card-text">Step 1: Select the Logical Gate by selecting the radio button next to the gate name<br/> If you wish to reload the demonstration at any point, press the Reload button.</p>
+            </div>
+        </div>
+        <br/>
+    </div>
+ </div>
+</div>
+</body>
+<footer class="footer navbar-light bg-light">
+
+This website was made as part of a Final Year Project
+
+</footer>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Perceptron Algorithm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="/resources/CSS/style.css">
+</head>
+<body>
+    <nav class='navbar-light bg-light'>
+         <a href = '../index.html'  class="navbar-brand ">The Perceptron Algorithm</a>
+    </nav>
+    <nav class="nav nav-tabs sticky-top nav-fill nav-justified navbar-light bg-light">
+
+          <a class="nav-item nav-link" href="/Learn/Perceptron.html">What is the Perceptron?</a>
+          <a class="nav-item nav-link active" href="/Learn/PerceptronUses.html">How Can The Perceptron Be Used?</a>
+          <a class="nav-item nav-link" href="/Learn/PerceptronLimitations.html">Limitations of The Perceptron</a>
+          <a class="nav-item nav-link" href="/Learn/WhatsNext.html">What's Next?</a>
+     </nav>
+    <br/>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-12">
+      <h2>How are Artificial Neural Networks Used Today?</h2>
+      <p>Artificial Neural Networks can be applied to a vast array of fields, below I will detail a sample of the various areas that ANN's can be used in:
+        <ul><li>
+            Aerospace − Autopilot aircrafts, aircraft fault detection.</li>
+<li>Automotive − Automobile guidance systems.</li>
+<li>Military − Weapon orientation and steering, target tracking, object discrimination, facial recognition, signal/image identification.</li>
+<li>Electronics − Code sequence prediction, IC chip layout, chip failure analysis, machine vision, voice synthesis.</li>
+<li>Financial − Real estate appraisal, loan advisor, mortgage screening, corporate bond rating, portfolio trading program, corporate financial analysis, currency value prediction, document readers, credit application evaluators.</li>
+<li>Industrial − Manufacturing process control, product design and analysis, quality inspection systems, welding quality analysis, paper quality prediction, chemical product design analysis, dynamic modeling of chemical process systems, machine maintenance analysis, project bidding, planning, and management.</li>
+<li>Medical − Cancer cell analysis, EEG and ECG analysis, prosthetic design, transplant time optimizer.</li>
+<li>Speech − Speech recognition, speech classification, text to speech conversion.</li>
+<li>Telecommunications − Image and data compression, automated information services, real-time spoken language translation.</li>
+<li>Transportation − Truck Brake system diagnosis, vehicle scheduling, routing systems.</li>
+<li>Software − Pattern Recognition in facial recognition, optical character recognition, etc.</li>
+<li>Time Series Prediction − ANNs are used to make predictions on stocks and natural calamities.</li>
+<li>Signal Processing − Neural networks can be trained to process an audio signal and filter it appropriately in the hearing aids. </li>
+<li>Control − ANNs are often used to make steering decisions of physical vehicles. Anomaly Detection − As ANNs are expert at recognizing patterns, they can also be trained to generate an output when something unusual occurs that misfits the pattern.</li>
+</ul>
+        </p>
+        <hr>
+      <h2>How Can the Perceptron be Used?</h2>
+      <p>Looking at the list of application of Artificial Neural Networks, you can see that one main use is Pattern Recognition. The Perceptron can be used to classify data by recoginsing patterns within that data. <br/> If we look at the Demonstration below, there is a coordinate plane where a number of points are added in order to train the perceptron to recognise a pattern within the coordinate plane in order to classify new data points according to that pattern. The training data will be the x and y coordinates and the target output will be dependant on the relationship between x and y (If X is greater than Y, the training point part of Class 1 otherwise the training point is part of Class -1).</p>
+        <div style="text-align: center;">
+        <iframe src='../RandomLinearDemo.html' id = 'rnd' width="725" height="525"></iframe>
+        <br/>
+            <button type="button" class="btn btn-secondary" id ='btnrnd' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('rnd').src += '';
+                }
+            btnrnd.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+            <p class="card-text">Step 1: Enter the Number of Training Sets into the Text Field (e.g. 2000)<br/> Step 2: Enter the Learning Rate using the Slider<br/> Step 3: Click the Show Points button to display the training points on screen<br/> <i><b>Notice: </b>the dark points are part of one Class, whilst the light points are part of another Class</i> <br/> Step 4: Click the Train button to begin the training phase<br/><i><b>Notice: </b>The points with green detailing represent the perceptron correctly prediciting that point, whilst red represents incorrect predicitions for that point.</i> <br/> Step 5: If you wish to predict a new point, with an unknown output. Press the Stop button and enter the Inputs for the point, then pressing the Predict button.<br/> If you wish to reload the demonstration at any point, press the Reload button.
+            </p>
+            </div>
+        </div>
+        <br/>
+    <hr>
+      <h2>Fisher's Iris Data Set</h2>
+      <p>We can now apply this functionality to real world data. Ronald Fisher, a Statistician and Biologist, collected data on three types of Iris Flower species; Iris setosa, Iris virginica and Iris versicolor. <br/> <img src='../resources/Images/iris.jpg' alt="Neuron Diagram" class="center" height="150" width="400"><br/>Four features were measured from each sample: the length and the width of the sepals and petals, in centimetres. Due to the nature of the Perceptron being a binary classifier, we can implement the All vs One approach to the data set in order to classify whether an Iris Species is either Setosa or Virginica/ Versicolor. Below is a sample of the data set used to train the Perceptron:
+      </p>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sepal Length (cm)</th>
+              <th scope="col">Sepal Width (cm)</th>
+              <th scope="col">Petal Length (cm)</th>
+              <th scope="col">Petal Width (cm)</th>
+              <th scope="col">Species</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5.1</td>
+              <td>3.5</td>
+              <td>1.4</td>
+              <td>0.2</td>
+              <th scope="row">Iris Setosa</th>
+            </tr>
+            <tr>
+             <td>6.7</td>
+              <td>3.3</td>
+              <td>5.7</td>
+              <td>2.1</td>
+              <th scope="row">Iris Virginica</th>
+            </tr>
+            <tr>
+              <td>4.7</td>
+              <td>3.2</td>
+              <td>1.3</td>
+              <td>0.2</td>
+              <th scope="row">Iris Setosa</th>
+            </tr>
+            <tr>
+              <td>6.9</td>
+              <td>3.1</td>
+              <td>4.9</td>
+              <td>1.5</td>
+              <th scope="row">Iris Versicolor</th>
+            </tr>
+            <tr>
+              <td>4.6</td>
+              <td>3.1</td>
+              <td>1.5</td>
+              <td>0.2</td>
+              <th scope="row">Iris Setosa</th>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>3.2</td>
+              <td>4.7</td>
+              <td>1.4</td>
+              <th scope="row">Iris Versicolor</th>
+            </tr>
+            <tr>
+              <td>7.2</td>
+              <td>3.2</td>
+              <td>6</td>
+              <td>1.8</td>
+              <th scope="row">Iris Virginica</th>
+            </tr>
+          </tbody>
+        </table>
+         <p>Below is a demonstration showing how the Perceptron can recognise the patterns held within the data of the Iris species, and then classify new data points after the training process has been completed.</p>
+        <div style="text-align: center;">
+        <iframe src='../IrisDemo.html' id = 'iris' width="550" height="350"></iframe>
+        <br/>
+            <button type="button" class="btn btn-secondary" id ='btniris' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('iris').src += '';
+                }
+            btniris.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+            <p class="card-text">Step 1: Select the learning rate via the slider. <br/> Step 2: Press the Train button<br/> Step 3: Press the Stop button, to predict an unknown data set. <br/> Step 4: Enter in the data points for the Perceptron to predict. <br/> If you wish to reload the demonstration at any point, press the Reload button.</p>
+            </div>
+        </div>
+        <br/>
+    </div>
+ </div>
+</div>
+</body>
+<footer class="footer navbar-light bg-light">
+
+This website was made as part of a Final Year Project
+
+</footer>
+</html>

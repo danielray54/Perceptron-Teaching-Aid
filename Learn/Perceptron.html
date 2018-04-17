@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>The Perceptron Algorithm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/resources/CSS/style.css">
+</head>
+<body>
+    <nav class='navbar-light bg-light'>
+         <a href = '../index.html' class="navbar-brand ">The Perceptron Algorithm</a>
+    </nav>
+    <nav class="nav nav-tabs sticky-top nav-fill nav-justified navbar-light bg-light">
+          <a class="nav-item nav-link active" href="/Learn/Perceptron.html">What is the Perceptron?</a>
+          <a class="nav-item nav-link" href="/Learn/PerceptronUses.html">How Can The Perceptron Be Used?</a>
+          <a class="nav-item nav-link" href="/Learn/PerceptronLimitations.html">Limitations of The Perceptron</a>
+          <a class="nav-item nav-link" href="/Learn/WhatsNext.html">What's Next?</a>
+     </nav>
+     <br/>
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-12">
+      <h2>Artificial Neural Networks</h2>
+      <p>Dr. Robert Hecht-Nielsen, the inventor of one of the first neurocomputers, defines a neural network as: "...a computing system made up of a number of simple, highly interconnected processing elements, which process information by their dynamic state response to external inputs."
+      <br/><br/>
+      The idea of an Artificial Neural Network was conceived in part to process data in somewhat of a similar way to the human.  The human body consists of a large network of processing units called neurons. There are approximately 86 billion neurons within the nervous system of a human capable of processing vast amounts of data.
+      <br/><img src='../resources/Images/neuron.png' alt="Neuron Diagram" class="center" height="200" width="300"><br/>
+      Within each neuron there are four main components, the first being the Dendrites which accept electrical inputs in the neuron. Each input has an associated weight, which is assigned on the basis of its relative importance to other inputs. These inputs are then passed onto the Soma which sums the electrical inputs. The summed inputs are then turned into outputs by the Axon, if the sum is greater than a threshold then the neuron can ‘fire’ sending an electrical impulse out of the neuron as an output. The first to develop a conceptual model of a Neural Network was Warren McCulloch and Walter Pitts in 1943. A Neuroscientist and a logician, respectively, laid the foundation for future neural networks to be created.
+        </p>
+    <hr>
+    <h2>Learning Strategies</h2>
+      <p>A neural network is a “connectionist” computational system, where  information is processed collectively, in parallel throughout a network of nodes.
+
+          One of the key elements of a neural network is its ability to learn. A neural network is a complex adaptive system, meaning it can change its internal structure based on the information flowing through it. Typically, this is achieved through the adjusting of weights.<br/> There are several strategies that can be implemented into these adaptive systems:
+        <ul>
+<li><b>Supervised Learning: </b>In supervised learning, the training data is input to the network, and the desired output is known weights are adjusted until production yields desired value.</li>
+ <li><b>Unsupervised Learning: </b>The input data is used to train the network whose output is known. The network classifies the input data and adjusts the weight by feature extraction in input data.</li>
+<li><b>Reinforcement Learning: </b>Here the value of the output is unknown, but the network provides the feedback whether the output is right or wrong. It is Semi-Supervised Learning.</li>
+            <li><b>Offline Learning: </b>The adjustment of the weight vector and threshold is made only after all the training set is presented to the network. It is also called Batch Learning.</li>
+            <li><b>Online Learning :</b> The adjustment of the weight and threshold is made after presenting each training sample to the network.</li>
+        </ul>
+</p>
+    <hr>
+      <h2>The Perceptron Algorithm</h2>
+      <p>Invented in 1957 by Frank Rosenblatt at the Cornell Aeronautical Laboratory, a perceptron is the simplest neural network possible: a computational model of a single neuron. Much like the neuron within the brain, which contains an input unit; Dendrites, a processing unit; Soma, and an output unit; Axon. The Perceptron is modelled with these functionalities in mind. <br/>
+        We will now go through the steps of the Perceptron Algorithm:
+          <ol>
+              <li>Step 1: Initilise Weights of Connections and Bias</li>
+              <li>Step 2: Set the Learning Rate to some positive coefficient between 0 and 1</li>
+              <li>Step 3: Begin the Training Loop - Inputs are Weighted</li>
+              <li>Step 4: Weighted Inputs are then summed together</li>
+              <li>Step 5: Sum is then pushed through the Activation Function</li>
+              <li>Step 6: The Weights of Connections are updated using the Perceptron's Learning Rule</li>
+              <li>Step 7: Terminating Check</li>
+      </ol>
+      To see the Perceptron Algorithm in action, please go through the Demonstration below:
+      </p>
+        <div style="text-align: center;">
+        <iframe src='../ArchitectureDemo.html' id = 'arch' width="725" height="525"></iframe>
+        <br/>
+            <button type="button" class="btn btn-secondary" id ='btn' data-toggle="tooltip" data-placement="bottom" title="Reload Demonstration">
+            Reload
+            </button>
+        </div>
+        <br/>
+        <script>
+            function reload() {     document.getElementById('arch').src += '';
+                }
+            btn.onclick = reload;
+        </script>
+        <div class="card">
+            <div class="card-header">
+                Instructions
+            </div>
+            <div class="card-body">
+                <p class="card-text">Step 1: Enter the values of the training set: X1, X2 and the Target Output.<br/> Step 2: Follow the steps of the Algorithm by clicking the Next button.<br/> <i><b>Note:</b> Once you have reached the second step of the Algorithm you will be asked to input the Learning rate via a slider.</i><br/> If you wish to reload the demonstration at any point, press the Reload button.</p>
+            </div>
+        </div>
+        <br/>
+    </div>
+ </div>
+</div>
+</body>
+<footer class="footer navbar-light bg-light">
+
+This website was made as part of a Final Year Project
+
+</footer>
+</html>

@@ -1,13 +1,14 @@
-#rndDemo{
-    border: 1px solid black;
-}
-#irisDemo{
-    border: 1px solid black;
-}
-#arch{
-    border: 1px solid black;
-    padding: none;
+.footer {
+  text-align: center;
 }
 iframe{
-    border: none;
+    display: flex;
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid black;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
